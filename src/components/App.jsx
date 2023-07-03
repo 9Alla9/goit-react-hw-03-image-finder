@@ -21,13 +21,11 @@ export class App extends React.Component {
   };
 
   handleSubmit = inputQuery => {
-    this.setState({ inputValue: inputQuery });
-    this.setState({ page: 1 });
+    this.setState({ inputValue: inputQuery, page: 1, picturesData: [] });
   };
 
   loaderClick = () => {
     this.setState(prevState => ({
-      ...prevState,
       page: prevState.page + 1,
     }));
   };
@@ -36,22 +34,7 @@ export class App extends React.Component {
     this.setState({ isModal: true, clickedImg: url });
   };
 
-  handleKeyDown = event => {
-    if (event.key === 'Escape') {
-      this.setState({ isModal: false });
-    }
-  };
-
-  handleBackdrop = event => {
-    if (event.currentTarget === event.target) {
-      this.setState({ isModal: false });
-    }
-  };
-
   componentDidUpdate(prevProps, prevState) {
-    this.state.inputValue !== prevState.inputValue &&
-      this.setState({ picturesData: [] });
-
     if (
       this.state.inputValue !== prevState.inputValue ||
       this.state.page !== prevState.page

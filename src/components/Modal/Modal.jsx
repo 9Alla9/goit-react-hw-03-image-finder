@@ -9,7 +9,17 @@ class Modal extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.props.onKeyDown);
   }
+  handleKeyDown = event => {
+    if (event.key === 'Escape') {
+      this.setState({ isModal: false });
+    }
+  };
 
+  handleBackdrop = event => {
+    if (event.currentTarget === event.target) {
+      this.setState({ isModal: false });
+    }
+  };
   render() {
     const { onBackdrop, children } = this.props;
 
