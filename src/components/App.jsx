@@ -31,9 +31,12 @@ export class App extends React.Component {
   };
 
   handleImageClick = url => {
-    this.setState({ isModal: true, clickedImg: url });
+    this.setState({ clickedImg: url, isModal: true });
   };
 
+  handleModalClose = () => {
+    this.setState({ clickedImg: null, isModal: false });
+  };
   componentDidUpdate(prevProps, prevState) {
     if (
       this.state.inputValue !== prevState.inputValue ||
@@ -85,12 +88,7 @@ export class App extends React.Component {
         )}
         <ToastContainer autoClose={3000} />
         {this.state.isModal && (
-          <Modal
-            onBackdrop={this.handleBackdrop}
-            onKeyDown={this.handleKeyDown}
-          >
-            {this.state.clickedImg}
-          </Modal>
+          <Modal onClose={this.handleModalClose}>{this.state.clickedImg}</Modal>
         )}
       </div>
     );
